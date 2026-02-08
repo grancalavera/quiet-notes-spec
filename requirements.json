@@ -1,0 +1,1235 @@
+[
+  {
+    "id": "REQ-AUTH-001",
+    "category": "authentication",
+    "description": "Users can sign in using a third-party identity provider.",
+    "steps": [
+      "Navigate to the application while unauthenticated.",
+      "Verify the login page is displayed with a sign-in button.",
+      "Click the sign-in button.",
+      "Complete the authentication flow.",
+      "Verify the user is redirected to the notebook page after successful sign-in."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-002",
+    "category": "authentication",
+    "description": "Users can sign out, which clears the session and returns them to the login page.",
+    "steps": [
+      "Sign in as an authenticated user.",
+      "Click the profile avatar button in the header.",
+      "Click the 'Sign Out' button in the popover.",
+      "Verify the session is cleared.",
+      "Verify the user is returned to the login page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-003",
+    "category": "authentication",
+    "description": "Unauthenticated users are redirected to the login page when accessing any protected route.",
+    "steps": [
+      "Attempt to navigate to the notebook page while unauthenticated.",
+      "Verify the user is redirected to the login page.",
+      "Verify that after signing in, the user is taken to the originally requested page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-004",
+    "category": "authentication",
+    "description": "Authenticated users are redirected away from the login page to their original intended destination or the home page.",
+    "steps": [
+      "Sign in as an authenticated user.",
+      "Navigate to the login page.",
+      "Verify the user is redirected to the home page (or the previously intended page if available)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-005",
+    "category": "authentication",
+    "description": "A loading state is displayed while the application determines the user's authentication status.",
+    "steps": [
+      "Navigate to the application.",
+      "Verify a loading indicator is displayed while authentication is being determined.",
+      "Verify the appropriate page renders once the user's status is known."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-006",
+    "category": "authentication",
+    "description": "Authentication state persists across page refreshes (session persistence).",
+    "steps": [
+      "Sign in as an authenticated user.",
+      "Refresh the page.",
+      "Verify the user remains authenticated without needing to sign in again.",
+      "Verify the user is taken directly to the notebook (not the login page)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-001",
+    "category": "authorization",
+    "description": "The system supports three roles: 'user', 'author', and 'admin'.",
+    "steps": [
+      "Verify that users can be assigned the roles 'user', 'author', and 'admin'.",
+      "Verify that no other role values are accepted by the system."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-002",
+    "category": "authorization",
+    "description": "New users receive only the 'user' role by default upon account creation.",
+    "steps": [
+      "Create a new user account.",
+      "Verify the user has only the 'user' role.",
+      "Verify the user does not have 'author' or 'admin' roles."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-003",
+    "category": "authorization",
+    "description": "A pre-configured bootstrap admin receives all three roles ('user', 'author', 'admin') on first sign-up.",
+    "steps": [
+      "Configure the application with a designated admin email.",
+      "Create a new account using that email.",
+      "Verify the user has the 'user', 'author', and 'admin' roles."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-004",
+    "category": "authorization",
+    "description": "The notebook route requires the 'author' role. Users without it are redirected to the lobby.",
+    "steps": [
+      "Sign in as a user with only the 'user' role (no 'author' role).",
+      "Attempt to navigate to the notebook page.",
+      "Verify the user is redirected to the lobby page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-005",
+    "category": "authorization",
+    "description": "The admin route requires the 'admin' role. Users without it are redirected to the home page.",
+    "steps": [
+      "Sign in as a user without the 'admin' role.",
+      "Attempt to navigate to the admin page.",
+      "Verify the user is redirected to the home page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-006",
+    "category": "authorization",
+    "description": "The admin panel link in the header is only visible to users with the 'admin' role on desktop viewports.",
+    "steps": [
+      "Sign in as a user with the 'admin' role on a desktop viewport.",
+      "Verify the settings icon (admin link) is visible in the header.",
+      "Sign in as a user without the 'admin' role.",
+      "Verify the settings icon is not visible in the header."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-007",
+    "category": "authorization",
+    "description": "The admin panel link is not visible on mobile viewports even for admin users.",
+    "steps": [
+      "Sign in as a user with the 'admin' role on a mobile viewport.",
+      "Verify the admin link is not visible in the header."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTHZ-008",
+    "category": "authorization",
+    "description": "Privileged operations (toggling roles, listing users) verify the caller has the 'admin' role before executing.",
+    "steps": [
+      "Attempt to toggle a user's role without admin privileges.",
+      "Verify the request is rejected with an appropriate error.",
+      "Attempt to toggle a user's role with admin privileges.",
+      "Verify the request succeeds."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-001",
+    "category": "security",
+    "description": "Any authenticated user can create notes.",
+    "steps": [
+      "Sign in as an authenticated user.",
+      "Create a new note.",
+      "Verify the note is created successfully in the database."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-002",
+    "category": "security",
+    "description": "Users can only read their own notes (where the note's author field matches the user's ID).",
+    "steps": [
+      "Sign in as User A and create a note.",
+      "Sign in as User B.",
+      "Attempt to read User A's note.",
+      "Verify the read is denied with a permission error."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-003",
+    "category": "security",
+    "description": "Users can only update their own notes.",
+    "steps": [
+      "Sign in as User A and create a note.",
+      "Sign in as User B.",
+      "Attempt to update User A's note.",
+      "Verify the update is denied with a permission error."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-004",
+    "category": "security",
+    "description": "Users can only delete their own notes.",
+    "steps": [
+      "Sign in as User A and create a note.",
+      "Sign in as User B.",
+      "Attempt to delete User A's note.",
+      "Verify the delete is denied with a permission error."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-005",
+    "category": "security",
+    "description": "Users can only read and write their own settings.",
+    "steps": [
+      "Sign in as User A and save a theme preference.",
+      "Sign in as User B.",
+      "Attempt to read User A's settings.",
+      "Verify the read is denied.",
+      "Attempt to update User A's settings.",
+      "Verify the update is denied."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-006",
+    "category": "security",
+    "description": "Any authenticated user can create their own settings document.",
+    "steps": [
+      "Sign in as a new user with no existing settings.",
+      "Save a theme preference.",
+      "Verify the settings document is created successfully."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-007",
+    "category": "security",
+    "description": "Admins can read all user records. Non-admin users can only read their own user record.",
+    "steps": [
+      "Sign in as an admin user.",
+      "Request all user records.",
+      "Verify all records are returned.",
+      "Sign in as a non-admin user.",
+      "Attempt to read another user's record.",
+      "Verify the read is denied."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-008",
+    "category": "security",
+    "description": "Only admins can update user records (for role changes).",
+    "steps": [
+      "Sign in as a non-admin user.",
+      "Attempt to update any user record.",
+      "Verify the update is denied.",
+      "Sign in as an admin user.",
+      "Update a user record.",
+      "Verify the update succeeds."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-009",
+    "category": "security",
+    "description": "Unauthenticated requests to protected resources are rejected with appropriate errors.",
+    "steps": [
+      "Attempt to read notes without authentication.",
+      "Verify the request is rejected.",
+      "Attempt to perform a privileged operation without authentication.",
+      "Verify the request is rejected with an 'unauthenticated' error."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-010",
+    "category": "security",
+    "description": "Unauthorized requests receive permission-denied errors.",
+    "steps": [
+      "Sign in as a non-admin user.",
+      "Attempt to perform an admin-only operation (e.g., toggle a role).",
+      "Verify the request is rejected with a 'permission-denied' error code."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SEC-011",
+    "category": "security",
+    "description": "Admins can read all role-update notifications. Non-admin users can only read their own role-update notifications.",
+    "steps": [
+      "Sign in as an admin user.",
+      "Read the global role-update notification.",
+      "Verify the read succeeds.",
+      "Sign in as a non-admin user.",
+      "Attempt to read the global role-update notification.",
+      "Verify the read is denied.",
+      "Verify the user can read their own role-update notification."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ONBOARD-001",
+    "category": "onboarding",
+    "description": "When a new user account is created, the system automatically assigns initial roles and persists the user profile.",
+    "steps": [
+      "Create a new user account via sign-up.",
+      "Verify the user is assigned the 'user' role.",
+      "Verify the user's profile is persisted and retrievable."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ONBOARD-002",
+    "category": "onboarding",
+    "description": "The lobby page displays a 'Your application is being reviewed!' message for users who only have the 'user' role (no 'author' role).",
+    "steps": [
+      "Sign in as a user with only the 'user' role.",
+      "Navigate to the lobby page.",
+      "Verify the page displays 'Your application is being reviewed!'.",
+      "Verify the page displays 'Come back soon to check if it has been approved.'."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ONBOARD-003",
+    "category": "onboarding",
+    "description": "The lobby automatically redirects users who have the 'author' role to the notebook page.",
+    "steps": [
+      "Sign in as a user with the 'author' role.",
+      "Navigate to the lobby page.",
+      "Verify the user is redirected to the notebook page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ONBOARD-004",
+    "category": "onboarding",
+    "description": "The lobby automatically redirects users who have the 'admin' role (but not 'author') to the admin page.",
+    "steps": [
+      "Sign in as a user with the 'admin' role but not the 'author' role.",
+      "Navigate to the lobby page.",
+      "Verify the user is redirected to the admin page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-001",
+    "category": "note-management",
+    "description": "Users can create a new empty note. The note is assigned a unique ID and associated with the creating user.",
+    "steps": [
+      "Sign in as an author.",
+      "Click the create note button in the notebook toolbar.",
+      "Verify a new note appears in the notes list.",
+      "Verify the note has a unique ID.",
+      "Verify the note is associated with the current user.",
+      "Verify the note content is empty.",
+      "Verify the note has an initial version number."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-002",
+    "category": "note-management",
+    "description": "A note's display title is derived from the first line of its content. If the content is empty or the first line is blank, the title falls back to 'untitled'.",
+    "steps": [
+      "Create a new empty note.",
+      "Verify the note's displayed title is 'untitled'.",
+      "Type 'My First Note' as the first line.",
+      "Verify the displayed title updates to 'My First Note'.",
+      "Add a second line of text.",
+      "Verify the title still shows only the first line.",
+      "Clear all content.",
+      "Verify the title reverts to 'untitled'."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-003",
+    "category": "note-management",
+    "description": "Users can edit note content in a plain text editor. Changes are reflected immediately in the local state.",
+    "steps": [
+      "Open a note in the editor.",
+      "Type text into the editor.",
+      "Verify the text appears immediately.",
+      "Verify the note's title in the toolbar updates based on the first line.",
+      "Verify the editor supports multi-line text input."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-004",
+    "category": "note-management",
+    "description": "Note changes are auto-saved to the server after a short idle period.",
+    "steps": [
+      "Open a note and type text.",
+      "Stop typing and wait briefly.",
+      "Verify the changes are persisted to the server.",
+      "Verify the note's updated timestamp is refreshed.",
+      "Verify the note's version is incremented."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-005",
+    "category": "note-management",
+    "description": "Users can delete a note. Deleting an open note closes the editor.",
+    "steps": [
+      "Create a note and open it in the editor.",
+      "Click the delete button on the note.",
+      "Verify the note is removed from the notes list.",
+      "Verify the editor is closed (no note displayed).",
+      "Verify the note is deleted from the server."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-006",
+    "category": "note-management",
+    "description": "Users can duplicate a note. The duplicate has 'copy of [title]' prepended to the original content, gets a new unique ID, and opens automatically in the editor.",
+    "steps": [
+      "Create a note with content 'Hello World'.",
+      "Click the duplicate button.",
+      "Verify a new note is created in the notes list.",
+      "Verify the new note's content is 'copy of Hello World\\nHello World'.",
+      "Verify the new note has a different ID from the original.",
+      "Verify the new note is automatically opened in the editor."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-007",
+    "category": "note-management",
+    "description": "The notes list displays each note as a card showing: title, created date, and updated date.",
+    "steps": [
+      "Create multiple notes with different content.",
+      "Verify each note card in the list shows the derived title.",
+      "Verify each note card shows a 'Created [date]' label.",
+      "Verify each note card shows an 'Updated [date]' label.",
+      "Verify dates are formatted in a human-readable format."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-008",
+    "category": "note-management",
+    "description": "Each note tracks its content, author, version, and timestamps for creation and last update.",
+    "steps": [
+      "Create a note and save it.",
+      "Verify the note record contains: content, author, version, creation timestamp, and last-update timestamp.",
+      "Verify the creation timestamp is set on first save.",
+      "Verify the last-update timestamp is updated on subsequent saves.",
+      "Verify the version increments on each save."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-009",
+    "category": "note-management",
+    "description": "The creation timestamp is set on the first save. The last-update timestamp is set on every save.",
+    "steps": [
+      "Create a new note.",
+      "Save the note.",
+      "Verify the creation timestamp is set.",
+      "Verify the last-update timestamp is set.",
+      "Save the note again.",
+      "Verify the creation timestamp remains unchanged.",
+      "Verify the last-update timestamp is updated."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-010",
+    "category": "note-management",
+    "description": "Creating a note automatically opens it in the currently selected editor.",
+    "steps": [
+      "Verify no note is open in the editor.",
+      "Click the create note button.",
+      "Verify the newly created note is displayed in the editor.",
+      "Verify the editor textarea has focus."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-011",
+    "category": "note-management",
+    "description": "Each note card in the list has duplicate and delete action buttons.",
+    "steps": [
+      "Create a note.",
+      "Verify the note card in the list shows a duplicate button.",
+      "Verify the note card in the list shows a delete button."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-012",
+    "category": "note-management",
+    "description": "When both editors show the same note and that note is deleted, the notebook resets to default state (no notes open).",
+    "steps": [
+      "Open a note in the main editor.",
+      "Send the same note to the additional editor (desktop only).",
+      "Delete the note.",
+      "Verify both editors are closed.",
+      "Verify the notebook state is reset to default."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NOTE-013",
+    "category": "note-management",
+    "description": "When the main editor's note is deleted and the additional editor has a different note, the additional editor's note moves to the main editor.",
+    "steps": [
+      "Open note A in the main editor (desktop).",
+      "Open note B in the additional editor.",
+      "Delete note A.",
+      "Verify note B is now displayed in the main editor.",
+      "Verify the additional editor is closed."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SORT-001",
+    "category": "sorting",
+    "description": "Notes can be sorted by created date, newest first. This is the default sort order.",
+    "steps": [
+      "Create three notes at different times.",
+      "Verify the notes list displays them in newest-first order by default.",
+      "Open the sort menu.",
+      "Verify 'by created date (newest first)' is highlighted as the current selection."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SORT-002",
+    "category": "sorting",
+    "description": "Notes can be sorted by created date, oldest first.",
+    "steps": [
+      "Create three notes at different times.",
+      "Open the sort menu.",
+      "Select 'by created date (oldest first)'.",
+      "Verify the notes list reorders to show oldest notes first."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SORT-003",
+    "category": "sorting",
+    "description": "Notes can be sorted by title alphabetically (A to Z).",
+    "steps": [
+      "Create notes with titles starting with 'C', 'A', and 'B' (first line of content).",
+      "Open the sort menu.",
+      "Select 'by title (ABC...)'.",
+      "Verify the notes list reorders to show A, B, C."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SORT-004",
+    "category": "sorting",
+    "description": "Notes can be sorted by title in reverse alphabetical order (Z to A).",
+    "steps": [
+      "Create notes with titles starting with 'C', 'A', and 'B'.",
+      "Open the sort menu.",
+      "Select 'by title (ZYX...)'.",
+      "Verify the notes list reorders to show C, B, A."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SORT-005",
+    "category": "sorting",
+    "description": "The selected sort order persists during the session (but resets to default on page reload).",
+    "steps": [
+      "Select 'by title (ABC...)' sort order.",
+      "Navigate away from the notebook and back.",
+      "Verify the sort order is still 'by title (ABC...)'.",
+      "Reload the page.",
+      "Verify the sort order resets to 'by created date (newest first)'."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-001",
+    "category": "editor",
+    "description": "The editor is an accessible plain-text editing area that fills the available space.",
+    "steps": [
+      "Open a note in the editor.",
+      "Verify the editor is a plain-text editing area.",
+      "Verify the editor fills the available width and height.",
+      "Verify the editor does not allow resizing.",
+      "Verify the editor is accessible (has an appropriate accessible name)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-002",
+    "category": "editor",
+    "description": "The editor toolbar displays the note's derived title.",
+    "steps": [
+      "Open a note with content 'My Title' on the first line.",
+      "Verify the toolbar shows 'My Title'.",
+      "Change the first line to 'New Title'.",
+      "Verify the toolbar updates to show 'New Title'."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-003",
+    "category": "editor",
+    "description": "The editor toolbar has a duplicate button. On desktop, the main editor toolbar also has a 'send to additional editor' button, and the additional editor toolbar has a close button.",
+    "steps": [
+      "Open a note in the main editor on desktop.",
+      "Verify the toolbar shows a duplicate button.",
+      "Verify the toolbar shows a 'send to additional editor' button.",
+      "Open the additional editor.",
+      "Verify the additional editor toolbar shows a duplicate button and a close button.",
+      "On mobile, verify only the duplicate and close buttons are shown (no split button)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-004",
+    "category": "editor",
+    "description": "Clicking a note in the list opens it in the currently selected editor.",
+    "steps": [
+      "Create multiple notes.",
+      "Click on note A in the list.",
+      "Verify note A is displayed in the active editor.",
+      "Click on note B in the list.",
+      "Verify note B replaces note A in the active editor."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-005",
+    "category": "editor",
+    "description": "The currently open note is visually highlighted in the notes list.",
+    "steps": [
+      "Create multiple notes.",
+      "Open note A in the editor.",
+      "Verify note A's card in the list has a selected/highlighted background.",
+      "Verify other note cards do not have the highlighted background.",
+      "Open note B.",
+      "Verify note B is now highlighted and note A is no longer highlighted."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-006",
+    "category": "editor",
+    "description": "The currently focused editor has a visual indicator distinguishing it from inactive editors.",
+    "steps": [
+      "Open a note in the main editor on desktop.",
+      "Verify the main editor has a visual focus indicator.",
+      "Open the additional editor with a different note.",
+      "Click on the additional editor.",
+      "Verify the additional editor now has the focus indicator.",
+      "Verify the main editor's focus indicator is removed."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-EDIT-007",
+    "category": "editor",
+    "description": "When a note is opened in the editor, the textarea receives focus with the cursor positioned at the end of the content.",
+    "steps": [
+      "Create a note with some text content.",
+      "Click the note in the list to open it.",
+      "Verify the textarea has focus.",
+      "Verify the cursor is positioned at the end of the text."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SPLIT-001",
+    "category": "split-editor",
+    "description": "On desktop, clicking the 'send to additional editor' button opens a split view with two editors side by side (50%/50%).",
+    "steps": [
+      "Open a note in the main editor on desktop.",
+      "Click the 'send to additional editor' button.",
+      "Verify the additional editor opens alongside the main editor.",
+      "Verify both editors share the available width equally (50/50).",
+      "Verify the note is displayed in the additional editor."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SPLIT-002",
+    "category": "split-editor",
+    "description": "Each editor in the split view can display a different note independently.",
+    "steps": [
+      "Open note A in the main editor.",
+      "Send note A to the additional editor.",
+      "Click on note B in the notes list (while main editor is selected).",
+      "Verify note B is displayed in the main editor.",
+      "Verify note A remains displayed in the additional editor."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SPLIT-003",
+    "category": "split-editor",
+    "description": "Clicking a note in the list opens it in whichever editor is currently selected (focused).",
+    "steps": [
+      "Open the split view with two editors on desktop.",
+      "Click on the additional editor to select it.",
+      "Click on a note in the list.",
+      "Verify the note opens in the additional editor (not the main).",
+      "Click on the main editor to select it.",
+      "Click on a different note.",
+      "Verify that note opens in the main editor."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SPLIT-004",
+    "category": "split-editor",
+    "description": "The additional editor has a close button that returns the view to a single editor and selects the main editor.",
+    "steps": [
+      "Open the split view on desktop.",
+      "Click the close button on the additional editor.",
+      "Verify the additional editor is closed.",
+      "Verify only the main editor remains visible.",
+      "Verify the main editor is selected."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SPLIT-005",
+    "category": "split-editor",
+    "description": "The split editor automatically closes when the viewport shrinks to mobile or tablet size.",
+    "steps": [
+      "Open the split view on a desktop viewport.",
+      "Resize the browser window to a tablet-sized viewport.",
+      "Verify the additional editor is automatically closed.",
+      "Verify only the main editor remains."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SPLIT-006",
+    "category": "split-editor",
+    "description": "When the main editor's note is closed (via deletion), the additional editor's note moves to the main editor position.",
+    "steps": [
+      "Open note A in the main editor and note B in the additional editor.",
+      "Delete note A.",
+      "Verify note B moves to the main editor.",
+      "Verify the additional editor is closed."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-001",
+    "category": "admin",
+    "description": "The admin panel is accessible via the settings icon in the header. It is only visible to admin users on desktop viewports.",
+    "steps": [
+      "Sign in as an admin user on a desktop viewport.",
+      "Click the settings icon in the header.",
+      "Verify the admin panel is displayed.",
+      "Verify the admin page loads the admin table."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-002",
+    "category": "admin",
+    "description": "The admin panel displays a table of all users with columns: Email, Author (checkbox), Admin (checkbox), Created, Signed In, User UID.",
+    "steps": [
+      "Navigate to the admin panel as an admin user.",
+      "Verify the table has columns: Email, Author, Admin, Created, Signed In, User UID.",
+      "Verify all registered users appear in the table.",
+      "Verify the Author and Admin columns show checkboxes."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-003",
+    "category": "admin",
+    "description": "Admins can toggle the 'author' role for any user via the checkbox in the admin table.",
+    "steps": [
+      "Navigate to the admin panel.",
+      "Find a user without the 'author' role.",
+      "Check the Author checkbox for that user.",
+      "Verify the role change is sent to the server.",
+      "Verify the user now has the 'author' role.",
+      "Uncheck the Author checkbox.",
+      "Verify the 'author' role is revoked."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-004",
+    "category": "admin",
+    "description": "Admins can toggle the 'admin' role for any user via the checkbox in the admin table.",
+    "steps": [
+      "Navigate to the admin panel.",
+      "Find a user without the 'admin' role.",
+      "Check the Admin checkbox for that user.",
+      "Verify the role change is sent to the server.",
+      "Verify the user now has the 'admin' role.",
+      "Uncheck the Admin checkbox.",
+      "Verify the 'admin' role is revoked."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-005",
+    "category": "admin",
+    "description": "Role changes in the admin panel are executed server-side with admin verification.",
+    "steps": [
+      "Toggle a role in the admin panel.",
+      "Verify the role change is processed server-side.",
+      "Verify the system confirms the caller has admin privileges before applying the change.",
+      "Verify the role change is applied to the target user.",
+      "Verify the user's persisted profile reflects the new roles."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-006",
+    "category": "admin",
+    "description": "The admin route is not available on mobile viewports.",
+    "steps": [
+      "View the application on a mobile viewport.",
+      "Attempt to navigate to the admin page.",
+      "Verify the user is redirected away from the admin page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ADMIN-007",
+    "category": "admin",
+    "description": "Non-admin users who attempt to access the admin route on desktop are redirected to the home page.",
+    "steps": [
+      "Sign in as a non-admin user on desktop.",
+      "Navigate to the admin page.",
+      "Verify the user is redirected to the home page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PROFILE-001",
+    "category": "profile",
+    "description": "The header displays a profile button showing the user's avatar.",
+    "steps": [
+      "Sign in as an authenticated user.",
+      "Verify the header shows a clickable avatar button.",
+      "Verify the avatar shows the user's profile photo (or a default avatar)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PROFILE-002",
+    "category": "profile",
+    "description": "Clicking the profile button opens a popover displaying: avatar, display name, email, and user ID.",
+    "steps": [
+      "Click the profile avatar button.",
+      "Verify a popover opens below the avatar.",
+      "Verify the popover shows a larger avatar image.",
+      "Verify the popover shows the user's display name.",
+      "Verify the popover shows the user's email.",
+      "Verify the popover shows the user's ID."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PROFILE-003",
+    "category": "profile",
+    "description": "The profile popover includes a 'Sign Out' button.",
+    "steps": [
+      "Open the profile popover.",
+      "Verify a 'Sign Out' button is displayed.",
+      "Click 'Sign Out'.",
+      "Verify the user is signed out and the page reloads."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-THEME-001",
+    "category": "theme",
+    "description": "The header includes a light/dark theme toggle switch with sun and moon icons.",
+    "steps": [
+      "Sign in as an authenticated user.",
+      "Verify the header displays a theme toggle switch.",
+      "Verify the switch shows a sun icon (light mode) or moon icon (dark mode).",
+      "Toggle the switch.",
+      "Verify the entire application theme changes between light and dark mode."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-THEME-002",
+    "category": "theme",
+    "description": "The theme preference is persisted to the server per user.",
+    "steps": [
+      "Toggle the theme to dark mode.",
+      "Verify the theme preference is saved to the user's settings on the server.",
+      "Sign out and sign back in.",
+      "Verify dark mode is restored from the server.",
+      "Sign in as a different user.",
+      "Verify the other user has their own independent theme preference."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-THEME-003",
+    "category": "theme",
+    "description": "The theme is loaded from the server on application initialization.",
+    "steps": [
+      "Set the theme to dark mode and ensure it is saved.",
+      "Reload the page.",
+      "Verify dark mode is applied after the app initializes.",
+      "Verify there is no visible flash of the wrong theme."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-THEME-004",
+    "category": "theme",
+    "description": "If no saved theme preference exists, the default theme (light) is applied.",
+    "steps": [
+      "Sign in as a new user with no saved settings.",
+      "Verify the application uses light mode by default."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-001",
+    "category": "responsive",
+    "description": "Mobile layout is used on small viewports.",
+    "steps": [
+      "Set the viewport to a mobile width.",
+      "Verify the mobile layout is rendered (notes list as main view, drawer for editor)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-002",
+    "category": "responsive",
+    "description": "Header icons are visually reduced at tablet sizes.",
+    "steps": [
+      "Set the viewport to a tablet width.",
+      "Verify header icons are visually smaller than at desktop size."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-003",
+    "category": "responsive",
+    "description": "Desktop layout is used on large viewports.",
+    "steps": [
+      "Set the viewport to a desktop width.",
+      "Verify the desktop layout is rendered with a multi-pane layout."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-004",
+    "category": "responsive",
+    "description": "Desktop layout has a sidebar with a toolbar and notes list, and an editor area that fills the remaining space.",
+    "steps": [
+      "View the application on a desktop viewport.",
+      "Verify there is a narrower sidebar column containing a toolbar and notes list.",
+      "Verify the editor fills the remaining horizontal space."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-005",
+    "category": "responsive",
+    "description": "Mobile layout shows notes list as the main view. Tapping a note opens the editor in a right-side drawer that covers the full viewport.",
+    "steps": [
+      "View the application on a mobile viewport.",
+      "Verify the notes list is the main view.",
+      "Tap on a note in the list.",
+      "Verify a drawer slides in from the right showing the editor.",
+      "Verify the drawer covers the full viewport width and height.",
+      "Verify the mobile editor has a close button.",
+      "Click the close button.",
+      "Verify the drawer closes and the notes list is visible again."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-006",
+    "category": "responsive",
+    "description": "The mobile platform does not include an admin route.",
+    "steps": [
+      "View the application on a mobile viewport.",
+      "Verify no admin route is accessible.",
+      "Verify no admin link is visible in the header."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-007",
+    "category": "responsive",
+    "description": "The mobile platform does not support split editor functionality.",
+    "steps": [
+      "View the application on a mobile viewport.",
+      "Open a note in the editor.",
+      "Verify there is no 'send to additional editor' button.",
+      "Verify only the duplicate and close buttons are in the toolbar."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-RESPONSIVE-008",
+    "category": "responsive",
+    "description": "The application switches between desktop and mobile layouts based on viewport width.",
+    "steps": [
+      "Set viewport to a desktop width.",
+      "Verify the desktop layout is rendered.",
+      "Resize to a mobile width.",
+      "Verify the mobile layout is rendered.",
+      "Resize back to desktop width.",
+      "Verify the desktop layout is rendered again."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SYNC-001",
+    "category": "sync",
+    "description": "Notes sync in real-time across clients. Changes made in one client appear in another without a page refresh.",
+    "steps": [
+      "Sign in as the same user in two browser windows.",
+      "Create a note in window A.",
+      "Verify the note appears in window B's notes list without refreshing.",
+      "Edit the note in window A.",
+      "Verify the changes appear in window B."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SYNC-002",
+    "category": "sync",
+    "description": "Local edits are applied optimistically. The user sees their changes immediately without waiting for server confirmation.",
+    "steps": [
+      "Open a note in the editor.",
+      "Type text.",
+      "Verify the text appears instantly in the editor (no delay).",
+      "Verify the local state is updated before the server write completes."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SYNC-003",
+    "category": "sync",
+    "description": "Concurrent edits from multiple clients are resolved without data loss.",
+    "steps": [
+      "Open the same note in two browser windows.",
+      "Make different edits in both windows simultaneously.",
+      "Verify the edits are merged without errors.",
+      "Verify one consistent version of the note is established across both clients.",
+      "Verify no data is silently lost."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-SYNC-004",
+    "category": "sync",
+    "description": "The notes collection updates in real-time. New notes appear and deleted notes disappear in all connected clients.",
+    "steps": [
+      "Sign in as the same user in two browser windows.",
+      "Create a note in window A.",
+      "Verify the note appears in window B's list.",
+      "Delete the note in window A.",
+      "Verify the note disappears from window B's list."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PWA-001",
+    "category": "pwa",
+    "description": "The application is installable as a PWA with a manifest that includes name, icons, and standalone display mode.",
+    "steps": [
+      "Navigate to the application.",
+      "Verify the web manifest is loaded with name 'Quiet Notes'.",
+      "Verify the manifest specifies 'standalone' display mode.",
+      "Verify the manifest includes icons at standard PWA sizes.",
+      "Verify the manifest includes a maskable icon.",
+      "Verify the browser offers to install the application."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PWA-002",
+    "category": "pwa",
+    "description": "A service worker caches the app shell for offline loading.",
+    "steps": [
+      "Load the application and wait for the service worker to install.",
+      "Verify static assets (HTML, CSS, JS, icons) are cached.",
+      "Go offline.",
+      "Verify the app shell loads from the cache."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PWA-003",
+    "category": "pwa",
+    "description": "When a new version is detected, a non-blocking snackbar appears with the message 'New version available' and an 'Update' button.",
+    "steps": [
+      "Deploy a new version of the application.",
+      "Verify a snackbar appears at the bottom-right of the screen.",
+      "Verify the snackbar message says 'New version available'.",
+      "Verify the snackbar includes an 'Update' button.",
+      "Verify the snackbar does not block user interaction with the app."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PWA-004",
+    "category": "pwa",
+    "description": "Clicking the 'Update' button in the version prompt refreshes the application to load the new version.",
+    "steps": [
+      "When the update snackbar is visible, click the 'Update' button.",
+      "Verify the service worker is updated.",
+      "Verify the page reloads with the new version."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-PWA-005",
+    "category": "pwa",
+    "description": "The application provides Apple touch icons for iOS devices.",
+    "steps": [
+      "Verify the application includes apple-touch-icon files at standard iOS sizes.",
+      "Verify the icons are discoverable by iOS devices."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NAV-001",
+    "category": "navigation",
+    "description": "The logo 'Qn.' in the header is clickable and navigates to the home page.",
+    "steps": [
+      "Sign in and navigate to the admin panel.",
+      "Click the 'Qn.' logo in the header.",
+      "Verify the user is navigated to the home page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NAV-002",
+    "category": "navigation",
+    "description": "The header includes a GitHub icon link that opens the repository in a new tab.",
+    "steps": [
+      "Verify the header displays a GitHub icon.",
+      "Click the GitHub icon.",
+      "Verify a new tab opens with the repository URL."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NAV-003",
+    "category": "navigation",
+    "description": "The header is always visible at the top of the page while body content scrolls independently.",
+    "steps": [
+      "Sign in to the application.",
+      "Verify the header is visible at the top.",
+      "Scroll the body content.",
+      "Verify the header remains fixed at the top.",
+      "Navigate between different routes.",
+      "Verify the header persists across all authenticated routes."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NAV-004",
+    "category": "navigation",
+    "description": "The application fills the full viewport with no scrollable overflow on the body.",
+    "steps": [
+      "Load the application.",
+      "Verify the app fills the full viewport.",
+      "Verify there is no horizontal or vertical scrollbar on the page body."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-NAV-005",
+    "category": "navigation",
+    "description": "Unmatched routes redirect to the notebook page for authenticated users.",
+    "steps": [
+      "Sign in as an author.",
+      "Navigate to the home page.",
+      "Verify the user is redirected to the notebook page.",
+      "Navigate to a non-existent page.",
+      "Verify the user is redirected to the notebook page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ERROR-001",
+    "category": "error-handling",
+    "description": "Application errors are captured in a global error state queue and displayed to the user.",
+    "steps": [
+      "Trigger an error condition (e.g., a failed server operation).",
+      "Verify the error is added to the global error state.",
+      "Verify an error dialog is displayed to the user showing the error details."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ERROR-002",
+    "category": "error-handling",
+    "description": "Permission-denied errors are handled specifically and display the error code.",
+    "steps": [
+      "Trigger a permission-denied error.",
+      "Verify the error dialog displays the error name and code.",
+      "Verify the error is distinguishable from other error types."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ERROR-003",
+    "category": "error-handling",
+    "description": "Users can dismiss errors from the error dialog via an OK button.",
+    "steps": [
+      "Trigger an error that displays the error dialog.",
+      "Verify the dialog has an OK button.",
+      "Click the OK button.",
+      "Verify the error is dismissed and the dialog closes.",
+      "Verify the error is removed from the error queue."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-ERROR-004",
+    "category": "error-handling",
+    "description": "Fatal rendering errors are caught and displayed with a 'Fatal Error' message instead of a blank screen.",
+    "steps": [
+      "Trigger a fatal rendering error.",
+      "Verify the error is caught and a 'Fatal Error' message is displayed.",
+      "Verify the application does not crash to a blank screen."
+    ],
+    "passes": false
+  }
+]

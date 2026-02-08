@@ -1,0 +1,15 @@
+{
+  "name": "quiet-notes-spec",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "tsx validate-requirements.ts"
+  },
+  "dependencies": {
+    "tsx": "4.21.0",
+    "typescript": "5.5.4",
+    "zod": "3.23.8"
+  }
+}
