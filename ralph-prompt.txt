@@ -18,6 +18,7 @@ YOUR TASK (complete in order):
 
 2. PICK ONE REQUIREMENT
    - Find the highest priority requirement where "passes": false
+   - Requirements are NOT listed in order - implement them in the most appropriate order for the project state
    - Consider dependencies and what's been completed to choose the best next requirement
    - Choose ONLY ONE requirement to implement
    - If all requirements have "passes": true, output PROMISE_COMPLETE and stop
