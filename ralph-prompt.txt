@@ -32,6 +32,7 @@ YOUR TASK (complete in order):
 
 4. IMPLEMENT THE FEATURE
    - Write minimal code to make the test pass
+   - Build thin e2e slices - complete vertical slices from UI to database
    - Follow the requirement steps exactly
    - Keep changes focused and small
 
@@ -65,6 +66,8 @@ YOUR TASK (complete in order):
 CRITICAL RULES:
 - Work on EXACTLY ONE requirement per iteration
 - Write the test BEFORE implementing
+- NEVER delete tests - all tests are permanent
+- Build thin e2e slices - complete vertical features from UI to database
 - Do NOT mark a requirement as passing unless the test passes
 - Append to progress.txt after every requirement (never skip this)
 - Do NOT implement multiple requirements at once
