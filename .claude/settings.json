@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_context7_context7__*",
+      "mcp__playwright__*",
+      "Bash",
+      "WebSearch",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:pocketbase.io)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "excludedCommands": ["docker", "docker-compose"]
+  }
+}
