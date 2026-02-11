@@ -10,7 +10,7 @@
       "Complete the authentication flow.",
       "Verify the user is redirected to the notebook page after successful sign-in."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-002",

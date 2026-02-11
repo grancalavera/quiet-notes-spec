@@ -6,7 +6,7 @@ const requirementSchema = z.object({
   category: z.string().min(1),
   description: z.string().min(1),
   steps: z.array(z.string().min(1)).min(1),
-  passes: z.literal(false),
+  passes: z.boolean(),
 });
 
 const requirementsSchema = z.array(requirementSchema).min(1);

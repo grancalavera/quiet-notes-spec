@@ -1,2 +1,3 @@
 [2026-02-08] Echo tracer bullet implemented. PocketBase + Vite stack proven end-to-end. Docker compose working. Commit: 5831b05
+[2026-02-11] REQ-AUTH-001 implemented. Username/password auth with PocketBase users collection. React Router with AuthProvider, ProtectedRoute, LoginPage, NotebookPage. Playwright e2e infrastructure bootstrapped. Test passing.
 
