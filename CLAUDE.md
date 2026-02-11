@@ -307,3 +307,19 @@ test("REQ-AUTH-002: users can sign out", async ({ loginPage }) => {
 - No `import { test } from '@playwright/test'` in spec files — always import from `e2e/fixtures/index.ts`
 - No page object inheritance — compose with component objects
 - No XPath selectors
+
+### Locator Maintenance
+
+When the UI changes and locators break:
+
+- ✅ **Fix the locator** in the Page Object or Component Object where it's defined
+- ✅ **Keep the test unchanged** — assertions and test logic remain permanent
+- ❌ **NEVER modify the test** to work around a broken locator
+- ❌ **NEVER delete the test** because a locator broke
+
+This separation means:
+
+- **Tests are permanent documentation** of requirements — they never change
+- **Locators are implementation details** that evolve with the UI
+- **One locator fix updates all tests** that use that page object
+- **Test assertions are sacred** — if a test fails, either fix the code or fix the locator, never the test
