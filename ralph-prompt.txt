@@ -25,13 +25,16 @@ YOUR TASK (complete in order):
 
 3. WRITE TEST FIRST
    - Before implementing, write a Playwright e2e test that verifies the requirement
+   - Create/update Page Objects with semantic locators (getByRole, getByLabel, getByText)
+   - The locators you write ARE THE CONTRACT for what markup you'll implement
    - Use e2e tests ONLY - no unit tests (coarse test harness strategy)
    - Tests go in e2e/specs/ (see CLAUDE.md Playwright TDD section)
-   - The test should fail initially (red)
-   - Run the test to verify it fails
+   - The test should fail initially (red) because the markup doesn't exist yet
+   - Run the test to verify it fails (expect "locator not found" or similar)
 
 4. IMPLEMENT THE FEATURE
    - Write minimal code to make the test pass
+   - Implement markup that satisfies the locator contract (semantic HTML with proper roles/labels)
    - Build thin e2e slices - complete vertical slices from UI to database
    - Follow the requirement steps exactly
    - Keep changes focused and small
