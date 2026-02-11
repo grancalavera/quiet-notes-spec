@@ -61,8 +61,11 @@ YOUR TASK (complete in order):
 
 9. UPDATE PROGRESS
    - Append (do NOT overwrite) to progress.txt
-   - Format: [YYYY-MM-DD] REQ-XXX-YYY: Brief description of what was implemented and any learnings
-   - Keep it concise (1-2 sentences max)
+   - Format: REQ-XXX-YYY [optional: brief gotcha/learning if relevant]
+   - Examples:
+     - REQ-AUTH-001
+     - REQ-NOTES-002 - PocketBase realtime needs explicit unsubscribe
+   - Keep learnings concise (one line max)
 
 10. COMMIT
    - Git commit with message format: "feat(REQ-XXX-YYY): Brief description"
