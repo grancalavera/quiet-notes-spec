@@ -2,3 +2,4 @@ node_modules
 pocketbase/pb_data
 client/dist/
 client/tsconfig.tsbuildinfo
+.pnpm-store
