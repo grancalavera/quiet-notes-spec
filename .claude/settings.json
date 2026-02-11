@@ -15,6 +15,6 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false,
-    "excludedCommands": ["docker", "docker-compose"]
+    "excludedCommands": ["docker", "docker-compose", "git"]
   }
 }
