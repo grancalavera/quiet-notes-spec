@@ -9,9 +9,7 @@ export function App() {
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    pb.collection("echoes")
-      .getFullList({ sort: "-created" })
-      .then(setEchoes);
+    pb.collection("echoes").getFullList({ sort: "-created" }).then(setEchoes);
   }, []);
 
   async function handleSubmit(e: FormEvent) {
@@ -25,7 +23,9 @@ export function App() {
   }
 
   return (
-    <div style={{ maxWidth: 600, margin: "2rem auto", fontFamily: "system-ui" }}>
+    <div
+      style={{ maxWidth: 600, margin: "2rem auto", fontFamily: "system-ui" }}
+    >
       <h1>Echo Tracer Bullet</h1>
       <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8 }}>
         <input
