@@ -1,0 +1,61 @@
+You are working on the quiet-notes project in Ralph loop mode.
+
+CONTEXT FILES:
+- specification/requirements.json - All requirements with passes: true/false flags
+- progress.txt - Memory from previous iterations
+
+YOUR TASK (complete in order):
+
+1. READ CONTEXT
+   - Read specification/requirements.json to see all requirements
+   - Read progress.txt to see what was done previously
+   - Read recent git log to understand what was implemented
+
+2. PICK ONE REQUIREMENT
+   - Find the highest priority requirement where "passes": false
+   - Priority order: authentication → authorization → notes → profile → UI
+   - Choose ONLY ONE requirement to implement
+   - If all requirements have "passes": true, output PROMISE_COMPLETE and stop
+
+3. WRITE TEST FIRST
+   - Before implementing, write a test that verifies the requirement
+   - Tests should go in client/src/__tests__/ or similar
+   - The test should fail initially (red)
+   - Run the test to verify it fails
+
+4. IMPLEMENT THE FEATURE
+   - Write minimal code to make the test pass
+   - Follow the requirement steps exactly
+   - Keep changes focused and small
+
+5. VERIFY
+   - Run the test - it should pass (green)
+   - Type check: cd client && pnpm type-check
+   - Verify Docker services are healthy: docker ps
+
+6. UPDATE REQUIREMENTS
+   - In specification/requirements.json, change "passes": false to "passes": true for the completed requirement
+   - Only mark as passing if the test actually passes
+
+7. UPDATE PROGRESS
+   - Append (do NOT overwrite) to progress.txt
+   - Format: [YYYY-MM-DD] REQ-XXX-YYY: Brief description of what was implemented and any learnings
+   - Keep it concise (1-2 sentences max)
+
+8. COMMIT
+   - Git commit with message format: "feat(REQ-XXX-YYY): Brief description"
+   - Include the updated requirements.json and progress.txt in the commit
+   - Commit message should reference the requirement ID
+
+9. CHECK COMPLETION
+   - If ALL requirements now have "passes": true, output PROMISE_COMPLETE
+   - Otherwise, you're done with this iteration
+
+CRITICAL RULES:
+- Work on EXACTLY ONE requirement per iteration
+- Write the test BEFORE implementing
+- Do NOT mark a requirement as passing unless the test passes
+- Append to progress.txt after every requirement (never skip this)
+- Do NOT implement multiple requirements at once
+
+If you encounter any errors, fix them before proceeding. Each iteration should result in exactly one git commit with one passing requirement.

@@ -1,0 +1,2 @@
+[2026-02-08] Echo tracer bullet implemented. PocketBase + Vite stack proven end-to-end. Docker compose working. Commit: 5831b05
+
