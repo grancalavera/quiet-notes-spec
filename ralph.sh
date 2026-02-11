@@ -23,7 +23,7 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   echo "=========================================="
 
   PROMPT=$(cat ralph-prompt.txt)
-  OUTPUT=$(claude code "$PROMPT" 2>&1 || true)
+  OUTPUT=$(claude "$PROMPT" 2>&1 || true)
 
   echo "$OUTPUT"
 

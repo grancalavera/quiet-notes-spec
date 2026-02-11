@@ -8,7 +8,7 @@ echo "Starting Ralph single iteration (interactive mode)"
 echo "=========================================="
 
 PROMPT=$(cat ralph-prompt.txt)
-claude code "$PROMPT"
+claude --model opus --effort high "$PROMPT"
 
 echo ""
 echo "=========================================="
