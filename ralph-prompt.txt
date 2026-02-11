@@ -34,6 +34,9 @@ YOUR TASK (complete in order):
 
 4. IMPLEMENT THE FEATURE
    - Write minimal code to make the test pass
+   - Use Playwright MCP tools to interactively verify the UI during development
+     - Navigate to pages, take snapshots, click buttons, test locators work
+     - Quick feedback loop before running the full e2e test
    - Implement markup that satisfies the locator contract (semantic HTML with proper roles/labels)
    - Build thin e2e slices - complete vertical slices from UI to database
    - Follow the requirement steps exactly
