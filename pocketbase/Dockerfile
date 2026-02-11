@@ -11,4 +11,4 @@ COPY pb_migrations /pb/pb_migrations
 
 EXPOSE 8090
 
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
+CMD sh -c "/pb/pocketbase superuser create \${PB_SUPERUSER_EMAIL} \${PB_SUPERUSER_PASS} || true && exec /pb/pocketbase serve --http=0.0.0.0:8090"
