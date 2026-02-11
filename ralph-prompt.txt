@@ -11,12 +11,13 @@ YOUR TASK (complete in order):
    - Read progress.txt to see what was done previously
    - Read recent git log to understand what was implemented
 
-2. PRECONDITION CHECKS
+2. VERIFY CLEAN STATE
    - Run: cd client && pnpm format:fix && pnpm lint:fix
    - If any files changed (check git status), commit: "style: format and lint fixes"
    - Run all existing e2e tests: cd e2e && pnpm test
    - If any tests fail, fix the regressions before proceeding
    - Do NOT start new work until all existing tests pass
+   - Commit all fixes before starting the new feature
    - This ensures a clean baseline before feature work
 
 3. PICK ONE REQUIREMENT
