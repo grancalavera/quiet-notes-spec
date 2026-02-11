@@ -11,6 +11,11 @@ YOUR TASK (complete in order):
    - Read progress.txt to see what was done previously
    - Read recent git log to understand what was implemented
 
+1.5. FORMAT & LINT CLEANUP
+   - Run: cd client && pnpm format:fix && pnpm lint:fix
+   - If any files changed (check git status), commit: "style: format and lint fixes"
+   - This ensures a clean baseline before feature work
+
 2. PICK ONE REQUIREMENT
    - Find the highest priority requirement where "passes": false
    - Priority order: authentication → authorization → notes → profile → UI
@@ -19,7 +24,8 @@ YOUR TASK (complete in order):
 
 3. WRITE TEST FIRST
    - Before implementing, write a test that verifies the requirement
-   - Tests should go in client/src/__tests__/ or similar
+   - Playwright e2e tests go in e2e/specs/ (see CLAUDE.md Playwright TDD section)
+   - Unit tests go in client/src/__tests__/ if needed
    - The test should fail initially (red)
    - Run the test to verify it fails
 
@@ -32,6 +38,10 @@ YOUR TASK (complete in order):
    - Run the test - it should pass (green)
    - Type check: cd client && pnpm type-check
    - Verify Docker services are healthy: docker ps
+
+5.5. FINAL FORMAT & LINT CHECK
+   - Run: cd client && pnpm format:fix && pnpm lint:fix
+   - If any files changed, stage them (they'll be included in the feature commit)
 
 6. UPDATE REQUIREMENTS
    - In specification/requirements.json, change "passes": false to "passes": true for the completed requirement
