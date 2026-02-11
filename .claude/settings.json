@@ -7,7 +7,8 @@
       "WebSearch",
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:code.claude.com)",
-      "WebFetch(domain:pocketbase.io)"
+      "WebFetch(domain:pocketbase.io)",
+      "WebFetch(domain:registry.npmjs.org)"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -15,6 +16,6 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false,
-    "excludedCommands": ["docker", "docker-compose", "git"]
+    "excludedCommands": ["docker", "docker-compose", "git", "pnpm"]
   }
 }
