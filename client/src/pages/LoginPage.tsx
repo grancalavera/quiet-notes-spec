@@ -1,20 +1,23 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 
 export function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const from = location.state?.from?.pathname || "/notebook";
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError("");
     try {
       await login(email, password);
-      navigate("/notebook", { replace: true });
+      navigate(from, { replace: true });
     } catch {
       setError("Invalid email or password.");
     }

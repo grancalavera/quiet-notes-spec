@@ -34,7 +34,7 @@
       "Verify the user is redirected to the login page.",
       "Verify that after signing in, the user is taken to the originally requested page."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-004",
