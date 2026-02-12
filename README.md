@@ -13,3 +13,9 @@ Re-writing [notes.quiet.works](https://notes.quiet.works) from scratch, driven e
 - **[Claude Code Agent Teams](https://code.claude.com/docs/en/agent-teams)** — Experimental feature for coordinating multiple Claude Code instances as a team. A lead session spawns teammates that work in parallel with their own context windows, communicate via messaging, and share a task list. Best for parallel code review, competing-hypothesis debugging, and cross-layer feature work.
 
 - **[Claude Code Sandboxing](https://code.claude.com/docs/en/sandboxing)** — OS-level filesystem and network isolation for Claude Code's bash commands. Uses macOS Seatbelt or Linux bubblewrap to restrict file writes to the working directory and limit network access to approved domains, reducing permission prompts while protecting against prompt injection and data exfiltration.
+
+- **[Claude Code Hooks Reference](https://code.claude.com/docs/en/hooks)** — Reference for hook events, configuration schema, JSON input/output formats, exit codes, and matcher patterns. Hooks are user-defined shell commands or LLM prompts that execute automatically at specific lifecycle points (session start, before/after tool use, on stop, etc.) to enforce rules, block actions, or inject context.
+
+- **[Automate Workflows with Hooks](https://code.claude.com/docs/en/hooks-guide)** — Practical guide to setting up hooks with ready-to-use examples: auto-formatting code after edits, blocking edits to protected files, desktop notifications when Claude needs input, re-injecting context after compaction, and prompt/agent-based hooks for judgment-driven decisions.
+
+- **[How to Run Claude Code For Hours Autonomously](https://youtu.be/o-pMCoVPN_k)**
