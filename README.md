@@ -19,3 +19,5 @@ Re-writing [notes.quiet.works](https://notes.quiet.works) from scratch, driven e
 - **[Automate Workflows with Hooks](https://code.claude.com/docs/en/hooks-guide)** — Practical guide to setting up hooks with ready-to-use examples: auto-formatting code after edits, blocking edits to protected files, desktop notifications when Claude needs input, re-injecting context after compaction, and prompt/agent-based hooks for judgment-driven decisions.
 
 - **[How to Run Claude Code For Hours Autonomously](https://youtu.be/o-pMCoVPN_k)**
+
+- **[Hookify Plugin](https://github.com/anthropics/claude-code/tree/main/plugins/hookify)** — Claude Code plugin that lets you create custom hooks from simple markdown configuration files. Automatically detects and prevents unwanted behaviors by analyzing conversation patterns, using regex matching instead of manual JSON editing.
