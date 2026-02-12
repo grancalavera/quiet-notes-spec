@@ -4,9 +4,7 @@
   "license": "MIT",
   "private": true,
   "type": "module",
-  "scripts": {
-    "validate": "tsx validate-requirements.ts"
-  },
+  "scripts": {},
   "dependencies": {
     "tsx": "4.21.0",
     "typescript": "5.5.4",

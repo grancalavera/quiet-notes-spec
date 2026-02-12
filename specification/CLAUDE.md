@@ -54,17 +54,3 @@ These belong in architecture or design documents, not in the requirements specif
 
 If a test step can only be verified by inspecting internal state (database fields, custom claims, component trees), it belongs in a technical spec, not a requirement. Requirement steps should be verifiable through user-observable behavior or system-level guarantees (API contracts, access control outcomes).
 
-## Validation
-
-Requirements are validated with a TypeScript schema (Zod) via:
-
-```bash
-pnpm validate
-```
-
-This checks:
-
-- All requirements match the expected schema (id pattern, non-empty fields, `passes: false`)
-- All requirement IDs are unique
-
-Always run `pnpm validate` after editing `requirements.json`.

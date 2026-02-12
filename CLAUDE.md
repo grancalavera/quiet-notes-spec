@@ -106,12 +106,6 @@ Each Ralph iteration follows this workflow:
 
 The requirements specification lives in `specification/`. See `specification/CLAUDE.md` for guidelines on writing requirements.
 
-To validate requirements:
-
-```bash
-cd specification && pnpm install && pnpm validate
-```
-
 ## Playwright TDD
 
 ### Locator Strategy
