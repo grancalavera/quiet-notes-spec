@@ -68,7 +68,7 @@
       "Verify the user remains authenticated without needing to sign in again.",
       "Verify the user is taken directly to the notebook (not the login page)."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-007",
