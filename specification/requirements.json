@@ -56,7 +56,7 @@
       "Verify a loading indicator is displayed while authentication is being determined.",
       "Verify the appropriate page renders once the user's status is known."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-006",

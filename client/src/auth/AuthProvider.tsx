@@ -18,20 +18,36 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<RecordModel | null>(
-    pb.authStore.record ?? null,
-  );
+  const [user, setUser] = useState<RecordModel | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setUser(pb.authStore.record ?? null);
-    setIsLoading(false);
+    let cancelled = false;
+
+    async function initAuth() {
+      const minDelay = new Promise((r) => setTimeout(r, 100));
+
+      try {
+        await pb.collection("users").authRefresh();
+        if (!cancelled) setUser(pb.authStore.record ?? null);
+      } catch {
+        pb.authStore.clear();
+      }
+
+      await minDelay;
+      if (!cancelled) setIsLoading(false);
+    }
+
+    initAuth();
 
     const unsubscribe = pb.authStore.onChange((_token, record) => {
       setUser(record ?? null);
     });
 
-    return unsubscribe;
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
   }, []);
 
   async function login(email: string, password: string) {
@@ -44,7 +60,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext value={{ user, isLoading, login, logout }}>
-      {children}
+      {isLoading ? (
+        <div role="status" aria-label="Loading">
+          Loading…
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext>
   );
 }
