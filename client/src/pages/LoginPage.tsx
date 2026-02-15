@@ -1,9 +1,9 @@
 import { FormEvent, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 
 export function LoginPage() {
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("");
@@ -11,6 +11,10 @@ export function LoginPage() {
   const [error, setError] = useState("");
 
   const from = location.state?.from?.pathname || "/notebook";
+
+  if (user) {
+    return <Navigate to={from} replace />;
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();

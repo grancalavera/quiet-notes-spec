@@ -2,4 +2,5 @@
 [2026-02-11] REQ-AUTH-001 implemented. Username/password auth with PocketBase users collection. React Router with AuthProvider, ProtectedRoute, LoginPage, NotebookPage. Playwright e2e infrastructure bootstrapped. Test passing.
 [2026-02-11] REQ-AUTH-003 implemented. ProtectedRoute now passes `state: { from: location }` when redirecting to /login. LoginPage reads `location.state?.from?.pathname` and navigates there after sign-in (defaults to /notebook). E2e test verifies the full redirect round-trip.
 [2026-02-15] REQ-AUTH-002 implemented. Added header with profile avatar button and sign-out popover to NotebookPage. Clicking profile opens a popover with Sign Out button. Sign out clears PocketBase authStore and navigates to /login. Learned: emoji content inside buttons can interfere with aria-label accessible name in Chromium — use aria-hidden span instead.
+[2026-02-15] REQ-AUTH-004 implemented. Added auth guard to LoginPage — if user is already authenticated, redirects to the intended destination (from location state) or /notebook via React Router's Navigate component.
 
