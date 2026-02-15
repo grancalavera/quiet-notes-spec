@@ -96,7 +96,7 @@ export function LoginPage() {
       ) : (
         <>
           <h1>Sign Up</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSignUp}>
             <div style={{ marginBottom: "1rem" }}>
               <label htmlFor="email">Email</label>
               <br />

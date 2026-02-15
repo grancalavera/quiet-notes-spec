@@ -99,7 +99,7 @@
       "Verify the user is automatically signed in.",
       "Verify the user is redirected to the home page."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-009",

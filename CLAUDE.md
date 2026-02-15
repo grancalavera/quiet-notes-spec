@@ -9,23 +9,7 @@
 - **Frontend:** Latest Vite with React and TypeScript
 - **Package manager:** pnpm
 
-## Session Bootstrap
-
-Every agent session MUST begin by running the bootstrap script:
-
-```bash
-./init.sh
-```
-
-This script:
-
-1. Disables commit signing (no GPG key in agent sessions)
-2. Verifies Docker is running
-3. Builds and starts all services via `docker compose up --build -d`
-4. Waits for PocketBase and Vite to be healthy
-5. Runs a smoke test (echo round-trip)
-
-After bootstrap, read `progress.txt` and recent git log to understand current state before doing any work. Update `progress.txt` at the end of each session with what was accomplished.
+Read `progress.txt` and recent git log to understand current state before doing any work. Update `progress.txt` at the end of each session with what was accomplished.
 
 ## Git Commit Messages
 
@@ -34,6 +18,7 @@ After bootstrap, read `progress.txt` and recent git log to understand current st
 Use direct multiline strings in the `-m` flag. **Do not use heredocs** — they fail in sandbox due to temp file restrictions.
 
 **✅ Correct:**
+
 ```bash
 git commit -m "Short summary
 
@@ -44,6 +29,7 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 ```
 
 **❌ Incorrect (fails in sandbox):**
+
 ```bash
 git commit -m "$(cat <<'EOF'
 Message

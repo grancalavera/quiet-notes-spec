@@ -7,14 +7,15 @@
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:code.claude.com)",
       "WebFetch(domain:pocketbase.io)",
-      "WebFetch(domain:registry.npmjs.org)"
+      "WebFetch(domain:registry.npmjs.org)",
+      "Skill(playwright-cli)"
     ]
   },
   "enableAllProjectMcpServers": true,
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "allowUnsandboxedCommands": false,
+    "allowUnsandboxedCommands": true,
     "network": {
       "allowLocalBinding": true,
       "allowedDomains": [
@@ -25,6 +26,6 @@
         "registry.npmjs.org"
       ]
     },
-    "excludedCommands": ["git", "pnpm"]
+    "excludedCommands": ["git", "pnpm", "npx playwright", "node.*playwright"]
   }
 }
