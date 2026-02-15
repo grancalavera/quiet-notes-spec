@@ -5,13 +5,12 @@ cd "$REPO_ROOT"
 
 echo "=== quiet-notes teardown ==="
 
-docker compose down
-echo "[ok] Services stopped"
-
 if [[ "${1:-}" == "--clean" ]]; then
-  docker volume rm "$(basename "$REPO_ROOT" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g')_pb_data" 2>/dev/null && \
-    echo "[ok] PocketBase data volume removed" || \
-    echo "[skip] No PocketBase data volume found"
+  docker compose down -v
+  echo "[ok] Services stopped and volumes removed"
+else
+  docker compose down
+  echo "[ok] Services stopped"
 fi
 
 echo "=== Teardown complete ==="

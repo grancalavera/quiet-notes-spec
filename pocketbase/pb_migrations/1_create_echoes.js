@@ -1,4 +1,4 @@
-/// <reference path="../pb_data/types.d.ts" />
+/// <reference path="../pb_migrations.d.ts" />
 
 migrate(
   (app) => {
@@ -35,5 +35,5 @@ migrate(
   (app) => {
     const collection = app.findCollectionByNameOrId("echoes");
     app.delete(collection);
-  }
+  },
 );
