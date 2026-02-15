@@ -23,7 +23,7 @@
       "Verify the session is cleared.",
       "Verify the user is returned to the login page."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-003",
