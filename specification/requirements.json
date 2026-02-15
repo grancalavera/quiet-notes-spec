@@ -84,7 +84,7 @@
       "Switch back to sign-in mode.",
       "Verify the sign-in form is displayed again."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-008",
