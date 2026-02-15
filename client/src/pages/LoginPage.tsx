@@ -5,7 +5,7 @@ import { useAuth } from "../auth/AuthProvider";
 type Mode = "sign-in" | "sign-up";
 
 export function LoginPage() {
-  const { user, login } = useAuth();
+  const { user, login, signUp } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [mode, setMode] = useState<Mode>("sign-in");
@@ -20,7 +20,7 @@ export function LoginPage() {
     return <Navigate to={from} replace />;
   }
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSignIn(e: FormEvent) {
     e.preventDefault();
     setError("");
     try {
@@ -31,6 +31,17 @@ export function LoginPage() {
     }
   }
 
+  async function handleSignUp(e: FormEvent) {
+    e.preventDefault();
+    setError("");
+    try {
+      await signUp(email, password, passwordConfirm);
+      navigate("/notebook", { replace: true });
+    } catch {
+      setError("Failed to create account.");
+    }
+  }
+
   return (
     <div
       style={{ maxWidth: 400, margin: "4rem auto", fontFamily: "system-ui" }}
@@ -38,7 +49,7 @@ export function LoginPage() {
       {mode === "sign-in" ? (
         <>
           <h1>Sign In</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSignIn}>
             <div style={{ marginBottom: "1rem" }}>
               <label htmlFor="email">Email</label>
               <br />

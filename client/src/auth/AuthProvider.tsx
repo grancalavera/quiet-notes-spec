@@ -12,6 +12,7 @@ interface AuthContextType {
   user: RecordModel | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, passwordConfirm: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -54,12 +55,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await pb.collection("users").authWithPassword(email, password);
   }
 
+  async function signUp(email: string, password: string, passwordConfirm: string) {
+    await pb.collection("users").create({ email, password, passwordConfirm });
+    await pb.collection("users").authWithPassword(email, password);
+  }
+
   function logout() {
     pb.authStore.clear();
   }
 
   return (
-    <AuthContext value={{ user, isLoading, login, logout }}>
+    <AuthContext value={{ user, isLoading, login, signUp, logout }}>
       {isLoading ? (
         <div role="status" aria-label="Loading">
           Loading…
