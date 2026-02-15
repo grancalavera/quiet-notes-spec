@@ -10,18 +10,27 @@ echo "=== quiet-notes bootstrap ==="
 git config commit.gpgsign false
 echo "[ok] commit signing disabled"
 
-# 2. Verify Docker is available
+# 2. Install dependencies
+echo "--- Installing client dependencies..."
+(cd "$REPO_ROOT/client" && pnpm install)
+echo "[ok] client dependencies installed"
+
+echo "--- Installing e2e dependencies..."
+(cd "$REPO_ROOT/e2e" && pnpm install)
+echo "[ok] e2e dependencies installed"
+
+# 3. Verify Docker is available
 if ! docker info > /dev/null 2>&1; then
   echo "[FAIL] Docker is not running. Start OrbStack/Docker and retry."
   exit 1
 fi
 echo "[ok] Docker is running"
 
-# 3. Build and start services
+# 4. Build and start services
 echo "--- Building and starting services..."
 docker compose up --build -d
 
-# 4. Wait for PocketBase to be healthy
+# 5. Wait for PocketBase to be healthy
 echo "--- Waiting for PocketBase..."
 for i in $(seq 1 30); do
   if curl -sf http://localhost:8090/api/health > /dev/null 2>&1; then
@@ -36,7 +45,7 @@ for i in $(seq 1 30); do
   sleep 1
 done
 
-# 5. Wait for Vite dev server
+# 6. Wait for Vite dev server
 echo "--- Waiting for Vite dev server..."
 for i in $(seq 1 30); do
   if curl -sf http://localhost:5173 > /dev/null 2>&1; then
@@ -51,7 +60,7 @@ for i in $(seq 1 30); do
   sleep 1
 done
 
-# 6. Smoke test: create and read an echo record
+# 7. Smoke test: create and read an echo record
 echo "--- Smoke test: echo round-trip..."
 RESPONSE=$(curl -sf -X POST http://localhost:8090/api/collections/echoes/records \
   -H "Content-Type: application/json" \
