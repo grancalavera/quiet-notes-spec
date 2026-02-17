@@ -1,6 +1,7 @@
 import { test as setup } from "@playwright/test";
 
 const PB_URL = "http://localhost:8090";
+
 const SUPERUSER_EMAIL = "admin@example.com";
 const SUPERUSER_PASS = "admin123456";
 

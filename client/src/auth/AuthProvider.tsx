@@ -67,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext value={{ user, isLoading, login, signUp, logout }}>
       {isLoading ? (
-        <div role="status" aria-label="Loading">
+        <div className="loading-shell" role="status" aria-label="Loading">
           Loading…
         </div>
       ) : (
