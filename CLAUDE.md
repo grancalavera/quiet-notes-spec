@@ -8,6 +8,10 @@
 - **Realtime:** PocketBase realtime subscriptions for live note updates across clients
 - **Frontend:** Latest Vite with React and TypeScript
 - **Package manager:** pnpm
+- **PocketBase admin UI:** http://localhost:8090/_/
+- **Client UI:** http://localhost:5173/
+
+Run `./check-env.sh` to verify the dev environment is up before running tests or doing work.
 
 Read `progress.txt` and recent git log to understand current state before doing any work. Update `progress.txt` at the end of each session with what was accomplished.
 

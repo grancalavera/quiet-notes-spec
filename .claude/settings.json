@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "deny": ["WebFetch"],
     "allow": [
       "mcp__plugin_context7_context7__*",
       "Bash",
@@ -11,21 +12,5 @@
       "Skill(playwright-cli)"
     ]
   },
-  "enableAllProjectMcpServers": true,
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true,
-    "allowUnsandboxedCommands": true,
-    "network": {
-      "allowLocalBinding": true,
-      "allowedDomains": [
-        "www.anthropic.com",
-        "anthropic.com",
-        "code.claude.com",
-        "pocketbase.io",
-        "registry.npmjs.org"
-      ]
-    },
-    "excludedCommands": ["git", "pnpm", "npx playwright", "node.*playwright"]
-  }
+  "enableAllProjectMcpServers": true
 }
