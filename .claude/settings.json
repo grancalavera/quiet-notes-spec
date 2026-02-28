@@ -1,9 +1,38 @@
 {
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "excludedCommands": ["playwright-cli"],
+    "filesystem": {
+      "allowWrite": [
+        "//tmp",
+        "~/Library/Caches/ms-playwright",
+        "~/.npm",
+        "~/.local/share/pnpm"
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "localhost",
+        "127.0.0.1",
+        "registry.npmjs.org",
+        "*.npmjs.org"
+      ],
+      "allowLocalBinding": true
+    }
+  },
   "permissions": {
-    "deny": ["WebFetch"],
+    "deny": [
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "WebFetch"
+    ],
     "allow": [
-      "mcp__plugin_context7_context7__*",
       "Bash",
+      "mcp__plugin_context7_context7__*",
       "WebSearch",
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:code.claude.com)",
@@ -12,5 +41,16 @@
       "Skill(playwright-cli)"
     ]
   },
-  "enableAllProjectMcpServers": true
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/e2e-check.sh"
+          }
+        ]
+      }
+    ]
+  }
 }

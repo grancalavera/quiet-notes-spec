@@ -2,6 +2,24 @@
 
 Analysis of which parts of `ralph-prompt.txt` could move from prompt instructions to deterministic Claude Code hooks.
 
+## Review
+
+**Verdict: good to start.** The analysis correctly separates mechanical guardrails from judgment work. A few suggestions before implementing:
+
+### Already partially done
+
+- Hook #4/6 (Stop gate) is already live — `e2e-check.sh` runs playwright on `Stop` and blocks with exit 2 on failure. The analysis should acknowledge this as prior art. Hook #4 just needs to add `pnpm type-check` and `docker ps` checks to the existing Stop hook (or as a second Stop hook entry).
+
+### Implementation order suggestion
+
+Start with **#1 (format/lint)** — it's the simplest, highest-frequency win and doesn't interact with the existing Stop hook. Then **#2 (test protection)**, then fold **#4 and #5** into or alongside the existing Stop hook. Save **#3 (SessionStart)** for last since running the full e2e suite on session start is slow and may need tuning (e.g., only run if tests were last modified before the session).
+
+### Watch out for
+
+- **Hook #2 complexity**: Detecting "content that removes test cases" in a `PreToolUse` hook is non-trivial. A simpler v1: block any `Write` to `e2e/specs/**` entirely and block `Bash` commands matching `rm *e2e/specs*`. Allow `Edit` since edits are additive by nature (they replace specific strings, not whole files). Revisit only if the simpler rule causes friction.
+- **Hook #3 cost**: Running the full e2e suite on every `SessionStart` adds 30-60s+ of latency before the agent can do anything. Consider making it conditional (e.g., skip if last commit was <5 min ago) or running only type-check + Docker health on start, leaving e2e for the Stop hook.
+- **Hook #5 (`PROMISE_COMPLETE`)**: This only matters when running under `ralph.sh`. If hooks run in all sessions, make sure the completion check is cheap and its output doesn't confuse normal interactive sessions. Guard it with a check like `[ -f specification/requirements.json ]`.
+
 ## Good hook candidates
 
 ### 1. Auto-format & lint after file edits (step 7, lines 54-56)
