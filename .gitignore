@@ -5,4 +5,5 @@ client/tsconfig.tsbuildinfo
 .pnpm-store
 .env
 .playwright-cli
+.playwright/user-data
 .DS_Store

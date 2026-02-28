@@ -3,7 +3,6 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false,
-    "excludedCommands": ["playwright-cli"],
     "filesystem": {
       "allowWrite": [
         "//tmp",

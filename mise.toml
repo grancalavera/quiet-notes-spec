@@ -1,0 +1,6 @@
+[tools]
+node = '24'
+pnpm = 'latest'
+
+[tools."npm:@playwright/cli"]
+version = "latest"

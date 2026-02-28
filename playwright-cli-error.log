@@ -1,0 +1,27 @@
+browserType.launch: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+
+Call log:
+  - <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,AutomationControlled --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=/tmp/claude/playwright_chromiumdev_profile-9Mvza3 --remote-debugging-port=60214 --no-startup-window
+  - <launched> pid=54956
+  - [pid=54956][err] [0228/150315.911814:ERROR:third_party/crashpad/crashpad/util/mach/bootstrap.cc:65] bootstrap_check_in org.chromium.crashpad.child_port_handshake.54958.12183622.LJNEHPBMBMKFHFPI: Permission denied (1100)
+  - [pid=54956][err] [0228/150315.912312:ERROR:third_party/crashpad/crashpad/util/file/file_io.cc:103] ReadExactly: expected 4, observed 0
+  - [pid=54956][err] [0228/150315.912606:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/leon.coto-rodriguez/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)
+  - [pid=54956][err] [0228/150315.912646:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /Users/leon.coto-rodriguez/Library/Application Support/Google/Chrome/Crashpad/settings.dat: Operation not permitted (1)
+  - [pid=54956][err] [54956:12183602:0228/150315.919469:ERROR:chrome/browser/process_singleton_posix.cc:1086] Failed to bind() /var/folders/0d/zc1qhd516h170jm5961qgd4h0000gn/T/com.google.Chrome.ze2FpC/SingletonSocket: Operation not permitted (1)
+  - [pid=54956][err] [54956:12183602:0228/150315.919575:ERROR:chrome/app/chrome_main_delegate.cc:513] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.
+  - [pid=54956] <gracefully close start>
+  - [pid=54956] <kill>
+  - [pid=54956] <will force kill>
+  - exception while trying to kill process: Error: kill EPERM
+  - [pid=54956] <process did exit: exitCode=21, signal=null>
+  - [pid=54956] starting temporary directories cleanup
+  - [pid=54956] finished temporary directories cleanup
+  - [pid=54956] <gracefully close end>
+
+---
+
+Additional context:
+- Browser "chromium" (bundled) is not installed — only system Chrome is available
+- Sandbox blocks: /bin/ps, `open` command, Chrome Crashpad settings.dat access
+- Root cause: playwright-cli uses system Chrome which conflicts with the user's running Chrome instance due to ProcessSingleton lock
+- Potential fix: install bundled chromium via `playwright-cli install-browser chromium`
