@@ -1,0 +1,16 @@
+# Claude Agent Progress Log
+
+This file tracks what has been accomplished across agent sessions.
+Each entry should note the date, what was done, and the resulting commit (if any).
+
+---
+
+## 2026-02-08 — Session 1: Echo tracer bullet
+
+- Scaffolded project structure: PocketBase backend + Vite/React/TS frontend
+- Created Docker Compose orchestration (pocketbase + client services)
+- PocketBase migration: `echoes` collection with `message` field + autodate fields
+- React echo UI: text input, send to PocketBase, display returned records
+- Verified end-to-end: UI -> PocketBase -> SQLite -> UI (data persists across refresh)
+- Created `init.sh` bootstrap script for agent session initialization
+- Commit: `5831b05` Add echo tracer bullet to prove the stack end-to-end

@@ -10,7 +10,7 @@
       "Complete the authentication flow.",
       "Verify the user is redirected to the notebook page after successful sign-in."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-002",
@@ -34,7 +34,7 @@
       "Verify the user is redirected to the login page.",
       "Verify that after signing in, the user is taken to the originally requested page."
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "REQ-AUTH-004",
@@ -67,6 +67,53 @@
       "Refresh the page.",
       "Verify the user remains authenticated without needing to sign in again.",
       "Verify the user is taken directly to the notebook (not the login page)."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-007",
+    "category": "authentication",
+    "description": "The login page provides a toggle to switch between sign-in and sign-up modes.",
+    "steps": [
+      "Navigate to the login page.",
+      "Verify the sign-in form is displayed by default.",
+      "Verify there is a visible control to switch to sign-up mode.",
+      "Switch to sign-up mode.",
+      "Verify the sign-up form is displayed with fields for email, password, and password confirmation.",
+      "Verify there is a visible control to switch back to sign-in mode.",
+      "Switch back to sign-in mode.",
+      "Verify the sign-in form is displayed again."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-008",
+    "category": "authentication",
+    "description": "Users can create a new account by providing an email address and a password with confirmation. After successful sign-up, the user is automatically signed in and redirected to the home page.",
+    "steps": [
+      "Navigate to the login page and switch to sign-up mode.",
+      "Enter a valid email address.",
+      "Enter a password and matching confirmation.",
+      "Submit the sign-up form.",
+      "Verify the account is created successfully.",
+      "Verify the user is automatically signed in.",
+      "Verify the user is redirected to the home page."
+    ],
+    "passes": false
+  },
+  {
+    "id": "REQ-AUTH-009",
+    "category": "authentication",
+    "description": "Sign-up displays appropriate error messages when the input is invalid, such as mismatched passwords or a duplicate email address.",
+    "steps": [
+      "Switch to sign-up mode on the login page.",
+      "Enter a password and a non-matching confirmation.",
+      "Attempt to submit the form.",
+      "Verify an error is displayed indicating the passwords do not match.",
+      "Correct the confirmation to match the password.",
+      "Enter an email address that is already registered.",
+      "Attempt to submit the form.",
+      "Verify an error is displayed indicating the account already exists."
     ],
     "passes": false
   },

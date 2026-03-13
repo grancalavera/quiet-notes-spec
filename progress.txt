@@ -1,0 +1,4 @@
+[2026-02-08] Echo tracer bullet implemented. PocketBase + Vite stack proven end-to-end. Docker compose working. Commit: 5831b05
+[2026-02-11] REQ-AUTH-001 implemented. Username/password auth with PocketBase users collection. React Router with AuthProvider, ProtectedRoute, LoginPage, NotebookPage. Playwright e2e infrastructure bootstrapped. Test passing.
+[2026-02-11] REQ-AUTH-003 implemented. ProtectedRoute now passes `state: { from: location }` when redirecting to /login. LoginPage reads `location.state?.from?.pathname` and navigates there after sign-in (defaults to /notebook). E2e test verifies the full redirect round-trip.
+
